@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.boot.generator.dao.ManageMenuMapper">
-  <resultMap id="BaseResultMap" type="com.boot.generator.bean.ManageMenu">
+<mapper namespace="com.boot.dao.ManageMenuMapper">
+  <resultMap id="BaseResultMap" type="com.boot.bean.ManageMenu">
     <id column="m_id" jdbcType="VARCHAR" property="mId" />
     <result column="menu_id" jdbcType="VARCHAR" property="menuId" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
@@ -29,7 +29,7 @@
     from manage_menu
     where m_id = #{mId,jdbcType=VARCHAR}
   </select>
-  <insert id="insert" parameterType="com.boot.generator.bean.ManageMenu">
+  <insert id="insert" parameterType="com.boot.bean.ManageMenu">
     insert into manage_menu (m_id, menu_id, menu_name, 
       parentid, levels, model, 
       status, xmlid, url, 
@@ -43,7 +43,7 @@
       #{updateDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{iconUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.boot.generator.bean.ManageMenu">
+  <insert id="insertSelective" parameterType="com.boot.bean.ManageMenu">
     insert into manage_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="mId != null">
@@ -146,7 +146,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.boot.generator.bean.ManageMenu">
+  <update id="updateByPrimaryKeySelective" parameterType="com.boot.bean.ManageMenu">
     update manage_menu
     <set>
       <if test="menuId != null">
@@ -197,7 +197,7 @@
     </set>
     where m_id = #{mId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.boot.generator.bean.ManageMenu">
+  <update id="updateByPrimaryKey" parameterType="com.boot.bean.ManageMenu">
     update manage_menu
     set menu_id = #{menuId,jdbcType=VARCHAR},
       menu_name = #{menuName,jdbcType=VARCHAR},
