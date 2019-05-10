@@ -3,21 +3,27 @@ server:
   servlet:    context-path: /
 
   
-spring:#  datasource:#    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring:
+#  thymeleaf:#    prefix: /static/
+#    suffix: .html
+#  datasource:#    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 #    username: root
 #    password: 
 #    type: com.alibaba.druid.pool.DruidDataSource
-  resources:
-    static-locations: 
-    - classpath:/static/
-#  mvc:#    view:
-#      prefix: /WEB-INF/jsp/
-#      suffix: .jsp
+#  resources:
+#    static-locations: 
+#    - classpath:/static/
+  mvc:
+#    static-path-pattern: /**    view:
+#      prefix: /pages/
+      suffix: .html
   http:    encoding:      charset: UTF-8
       enabled: true
       force: true
   messages:    encoding: UTF-8
     basename: i18n/messages
 #    cache-seconds: -1
-    
+
+mybatis:  config-location: classpath:conf/mybatis-config.xml
+  mapper-locations:  - classpath:mapper/*.xml
     

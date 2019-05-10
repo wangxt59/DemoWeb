@@ -23,6 +23,25 @@
     m_id, menu_id, menu_name, parentid, levels, model, status, xmlid, url, relate_sub_id, 
     menu_desciption, create_date, update_date, operator, sort, icon_url
   </sql>
+  
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manage_menu
+    where 1=1
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

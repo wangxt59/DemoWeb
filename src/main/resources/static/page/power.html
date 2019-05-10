@@ -99,114 +99,38 @@
                 </div>
             </div>
         	    <ul class="nav">
-                <li>
-                    <a  onclick="toUrl('dashboard',this)" class="one">
-                        <i class="pe-7s-graph"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li >
-                    <a data-toggle="collapse" href="#componentsExamples" aria-expanded="true">
-                        <i class="pe-7s-plugin"></i>
-                        <p>Components
-                           <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse in" id="componentsExamples">
-                        <ul class="nav">
-                            <li><a onclick="toUrl('buttons',this)" >Buttons</a></li>
-                            <li><a onclick="toUrl('grid',this)" >Grid System</a></li>
-                            <li><a onclick="toUrl('icons',this)" >Icons</a></li>
-                            <li><a onclick="toUrl('notifications',this)" >Notifications</a></li>
-                            <li><a onclick="toUrl('panels',this)" >Panels</a></li>
-                            <li><a onclick="toUrl('sweet-alert',this)" >Sweet Alert</a></li>
-                            <li><a onclick="toUrl('typography',this)" >Typography</a></li>
-                        </ul>
-                    </div>
-                </li>
 
-                <li>
-                    <a data-toggle="collapse" href="#formsExamples">
-                        <i class="pe-7s-note2"></i>
-                        <p>Forms
-                           <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="formsExamples">
-                        <ul class="nav">
-                            <li><a onclick="toUrl('regular',this)" >Regular Forms</a></li>
-                            <li><a onclick="toUrl('extended',this)" >Extended Forms</a></li>
-                            <li><a onclick="toUrl('validation',this)" >Validation Forms</a></li>
-                            <li><a onclick="toUrl('wizard',this)" >Wizard</a></li>
-                        </ul>
-                    </div>
-                </li>
 
-                <li>
-                    <a data-toggle="collapse" href="#tablesExamples">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Tables
-                           <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="tablesExamples">
-                        <ul class="nav">
-                            <li><a onclick="toUrl('regular',this)" >Regular Tables</a></li>
-                            <li><a onclick="toUrl('extended',this)" >Extended Tables</a></li>
-                            <li><a onclick="toUrl('bootstrap-table',this)" >Bootstrap Table</a></li>
-							<li><a onclick="toUrl('datatables.net',this)" >DataTables.net</a></li>
-                        </ul>
-                    </div>
-                </li>
+			<c:forEach items="${map.menus}" var="topMenu" varStatus="v">
+				<li style="clear:both;position:relative;" class="parentli"><a
+					data-toggle="collapse" href="${topMenu.menu_id}"
+					style="margin:5px  10px 0;display:flex;"> <span
+						style="display:inline-block;margin-top:5px;margin-right:5px;"><img
+							src="${topMenu.icon_url}" /></span>
+						<p>
+							<span style="display:block;line-height:25px;">${topMenu.menu_name}</span>
+							<span style="display:block;line-height:25px;">${topMenu.menu_desciption}</span>
+						</p> <span style="position:absolute;top:20px;right:20px"><b
+							class="caret"></b></span>
+				</a>
+					<div class="collapse parent" id="${topMenu.menu_id}">
+						<ul class="nav">
+							<c:forEach items="${topMenu.childMenuList}" var="childMenu">
 
-                <li>
-                    <a data-toggle="collapse" href="#mapsExamples">
-                        <i class="pe-7s-map-marker"></i>
-                        <p>Maps
-                           <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="mapsExamples">
-                        <ul class="nav">
-                            <li><a onclick="toUrl('google',this)" >Google Maps</a></li>
-                            <li><a onclick="toUrl('vector',this)" >Vector Maps</a></li>
-                            <li><a onclick="toUrl('fullscreen',this)" >Full Screen Map</a></li>
-                        </ul>
-                    </div>
-                </li>
+								<li id="${childMenu.menu_id}"><a
+									href="${childMenu.url}?${childMenu.menu_id}"
+									style="overflow:hidden;">
+										<p style="float:left;display:inline-block;">
+											<span style="display:block;line-height:25px;">${childMenu.menu_name }</span>
+											<span style="display:block;line-height:25px;">${childMenu.menu_desciption}</span>
+										</p>
 
-                <li>
-                    <a onclick="toUrl('charts',this)">
-                        <i class="pe-7s-graph1"></i>
-                        <p>Charts</p>
-                    </a>
-                </li>
-
-                <li>
-                    <a onclick="toUrl('calendar',this)">
-                        <i class="pe-7s-date"></i>
-                        <p>Calendar</p>
-                    </a>
-                </li>
-
-                <li>
-                    <a data-toggle="collapse" href="#pagesExamples">
-                        <i class="pe-7s-gift"></i>
-                        <p>Pages
-                           <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse" id="pagesExamples">
-                        <ul class="nav">
-                            <li><a onclick="toUrl('NewFile',this)" >Login Page</a></li>
-                            <li><a onclick="toUrl('NewFile',this)" >Register Page</a></li>
-                            <li><a onclick="toUrl('NewFile',this)">Lock Screen Page</a></li>
-                            <li><a onclick="toUrl('NewFile',this)">User Page</a></li>
-                            <li><a href="#">More coming soon...</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div></li>
+			</c:forEach>
+		</ul>
     	</div>
     </div>
 
@@ -327,7 +251,9 @@
 
       	<!--页面主体-->
 		<div class="content">
-		<div id="myManu" ></div>
+		<div id="myManu" >
+		<label class="col-sm-2 control-label"> 团长真实姓名:<c:out value="${data.code}" /></label>
+		</div>
 		</div>
 		<!--页面主体 over-->
 		
@@ -442,7 +368,7 @@
 		function toUrl(name,Obj){
 			$.ajax({
 	             type: "GET",
-	             url: "/toUrl.do",
+	             url: "toUrl.do",
 	             data: {url:name},
 	             dataType: "json",
 	             success: function(data){
