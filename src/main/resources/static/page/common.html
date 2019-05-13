@@ -145,7 +145,7 @@
                 <li>
                     <a data-toggle="collapse" href="#tablesExamples">
                         <i class="pe-7s-news-paper"></i>
-                        <p>Tables
+                        <p >Tables
                            <b class="caret"></b>
                         </p>
                     </a>
@@ -489,8 +489,8 @@
        	var url = $(obj).attr('state');
        	$("#content_iframe").attr("src",url)
        	} */
-    function showMenuList(menuId){
-	    var classValue = $("#menuId"+menuId).parent().find("ul").attr("class");
+    /* function showMenuList(menuId){
+	    var classValue = $("#"+menuId).parent().find("ul").attr("class");
 	    if(classValue == 'collapse'){
 	    $("#menu").find("li").find("ul").attr("class","collapse");
 	    $("#menuId"+menuId).parent().find("ul").attr("class","in");
@@ -498,6 +498,12 @@
 	    if(classValue == 'in'){
 	    $("#menuId"+menuId).parent().find("ul").attr("class","collapse");
 	    }
-    }
+    } */
+/* 	function showMenuList(menuId){
+	    var classValue = $("#"+menuId).parent().find("div").attr("class");
+	    if(classValue == 'collapse'){
+	   		$("#"+menuId).parent().find("div").attr("class","in");
+	    }
+	}	 */
 </script>
 </html>

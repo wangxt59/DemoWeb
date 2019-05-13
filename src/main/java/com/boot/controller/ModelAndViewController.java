@@ -68,15 +68,18 @@ public class ModelAndViewController{
 			}
 		}
 		for (Map<String, Object> manageMenu : manageMenuList) {
+			List childMenuList=new ArrayList<>();
 			for (ManageMenu manageMenu2 : manageMenus) {
-				Map<String, Object> childMenuList=new HashMap<String, Object>();
+				Map<String, Object> childMenuMap =new HashMap<String, Object>();
 				if (manageMenu.get("menu_id").equals(manageMenu2.getParentid())) {
-					childMenuList.put("menu_id",manageMenu2.getmId());
-					childMenuList.put("icon_url",manageMenu2.getIconUrl());
-					childMenuList.put("menu_name",manageMenu2.getMenuName());
-					childMenuList.put("menu_desciption",manageMenu2.getMenuDesciption());
-					manageMenu.put("childMenuList", childMenuList);
+					childMenuMap.put("menu_id",manageMenu2.getmId());
+					childMenuMap.put("icon_url",manageMenu2.getIconUrl());
+					childMenuMap.put("menu_name",manageMenu2.getMenuName());
+					childMenuMap.put("url",manageMenu2.getUrl());
+					childMenuMap.put("menu_desciption",manageMenu2.getMenuDesciption());
+					childMenuList.add(childMenuMap);
 				}
+				manageMenu.put("childMenuList", childMenuList);
 			}
 		}
 		
@@ -84,7 +87,8 @@ public class ModelAndViewController{
 		returnMap.put("url", "power");
 		returnMap.put("menus",manageMenuList);
 		System.out.println(returnMap.toString());
-		ModelAndView modelAndView=new ModelAndView("page/power","data",returnMap);
+		ModelAndView modelAndView=new ModelAndView("page/power",returnMap);
+		modelAndView.addObject("data", returnMap);
 		System.out.println(modelAndView);
 		return modelAndView;
 		
@@ -93,17 +97,13 @@ public class ModelAndViewController{
 	
 	
 	
-	@RequestMapping("/toUrl.do")
+	@RequestMapping("/todo.do")
 	@ResponseBody
 	public Map<String, Object> toUrl(HttpServletRequest request, HttpSession session) {
 		Map<String, Object> reMap=new HashMap<String, Object>();
 		Map<String, Object> returnMap=new HashMap<String, Object>();
 		String url=request.getParameter("url");
-		List<ManageMenu> manageMenus=manageMenuService.selectByMap(reMap);
-		System.out.println(manageMenus.toString());
-		returnMap.put("code", 0);
-		returnMap.put("url", url);
-		returnMap.put("menus", manageMenus);
+		returnMap.put("url", "#");
 		return returnMap;
 	}
 	

@@ -69,7 +69,7 @@
 
         <div class="logo">
             <a href="http://www.creative-tim.com" class="logo-text">
-                Creative Tim
+                	管理系统
             </a>
         </div>
 		<div class="logo logo-mini">
@@ -82,55 +82,43 @@
 
             <div class="user">
                 <div class="photo">
-                    <img src="/picture/default-avatar.png" />
+                    <img src="/picture/50308.png" />
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                        Tania Andrew
+                       	 用户
                         <b class="caret"></b>
                     </a>
                     <div class="collapse" id="collapseExample">
                         <ul class="nav">
-                            <li><a href="#">My Profile</a></li>
-                            <li><a href="#">Edit Profile</a></li>
-                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">我的资料</a></li>
+                            <li><a href="#">修改资料</a></li>
+                            <li><a href="#">个人设置</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <!-- 菜单 -->
         	    <ul class="nav">
-
-
-			<c:forEach items="${map.menus}" var="topMenu" varStatus="v">
-				<li style="clear:both;position:relative;" class="parentli"><a
-					data-toggle="collapse" href="${topMenu.menu_id}"
-					style="margin:5px  10px 0;display:flex;"> <span
-						style="display:inline-block;margin-top:5px;margin-right:5px;"><img
-							src="${topMenu.icon_url}" /></span>
-						<p>
-							<span style="display:block;line-height:25px;">${topMenu.menu_name}</span>
-							<span style="display:block;line-height:25px;">${topMenu.menu_desciption}</span>
-						</p> <span style="position:absolute;top:20px;right:20px"><b
-							class="caret"></b></span>
-				</a>
-					<div class="collapse parent" id="${topMenu.menu_id}">
+                <#list  menus as menu>
+				<li >
+					<a class="aa" data-toggle="collapse" id=${menu.menu_id} onclick="showMenuList(${menu.menu_id});">
+						<i><img src="${menu.icon_url}" /></i>
+	                    <p style="font-size:15px">${menu.menu_name}<b class="caret"></b></p>
+                  	</a>
+					<div class="collapse" id="formsExamples">
 						<ul class="nav">
-							<c:forEach items="${topMenu.childMenuList}" var="childMenu">
-
-								<li id="${childMenu.menu_id}"><a
-									href="${childMenu.url}?${childMenu.menu_id}"
-									style="overflow:hidden;">
-										<p style="float:left;display:inline-block;">
-											<span style="display:block;line-height:25px;">${childMenu.menu_name }</span>
-											<span style="display:block;line-height:25px;">${childMenu.menu_desciption}</span>
-										</p>
-
-								</a></li>
-							</c:forEach>
+						<#list menu.childMenuList as childMenu>
+							<li id="${childMenu.menu_id}">
+								<a onclick="toUrl('${childMenu.menu_name }','${childMenu.url}',this)" > ${childMenu.menu_name }</a>
+							</li>
+						</#list>
 						</ul>
-					</div></li>
-			</c:forEach>
-		</ul>
+					</div>
+				</li>
+				</#list>
+            </ul>
+            <!-- 菜单 -->
     	</div>
     </div>
 
@@ -251,9 +239,7 @@
 
       	<!--页面主体-->
 		<div class="content">
-		<div id="myManu" >
-		<label class="col-sm-2 control-label"> 团长真实姓名:<c:out value="${data.code}" /></label>
-		</div>
+		<div id="myManu" ></div>
 		</div>
 		<!--页面主体 over-->
 		
@@ -365,21 +351,20 @@
 
     </script>
 	<script type="text/javascript">
-		function toUrl(name,Obj){
+		function toUrl(name,url,Obj){
 			$.ajax({
 	             type: "GET",
-	             url: "toUrl.do",
-	             data: {url:name},
+	             url: "/todo.do",
+	             data: {url:url},
 	             dataType: "json",
 	             success: function(data){
-	            	 alert(data.code);
-	            	 alert(data.url);
-	            	 url=data.url;
-	            	 
+	            	 //alert(data.code);
+	            	 //alert(data.url);
+	            	url=data.url;
 	            	 
 	            	$("#myManu").load('/page/'+url+'.html');
 	     			var title=document.getElementById("title");
-	     			title.innerText=url;
+	     			title.innerText=name;
 	     			$("ul li").attr("class","")
 	     			$(Obj).parent().attr("class","active");
 	     			var aa=$(Obj).parent().parent().parent().parent().prop("nodeName");
@@ -415,15 +400,15 @@
        	var url = $(obj).attr('state');
        	$("#content_iframe").attr("src",url)
        	} */
-    function showMenuList(menuId){
-	    var classValue = $("#menuId"+menuId).parent().find("ul").attr("class");
-	    if(classValue == 'collapse'){
-	    $("#menu").find("li").find("ul").attr("class","collapse");
-	    $("#menuId"+menuId).parent().find("ul").attr("class","in");
+	function showMenuList(menuId){
+	    var classValue = $(menuId).parent().find("div").attr("class");
+	    if('collapse'==classValue){
+			$(menuId).parent().parent().find("li").find("div").attr("class","collapse");
+	   		$(menuId).parent().find("div").attr("class","collapse in");
 	    }
-	    if(classValue == 'in'){
-	    $("#menuId"+menuId).parent().find("ul").attr("class","collapse");
+		if(classValue == 'collapse in'){
+		    $(menuId).parent().find("div").attr("class","collapse");
 	    }
-    }
+	}	
 </script>
 </html>
