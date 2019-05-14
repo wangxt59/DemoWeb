@@ -356,13 +356,12 @@
 	             type: "GET",
 	             url: "/todo.do",
 	             data: {url:url},
-	             dataType: "json",
+	             dataType: "html",
 	             success: function(data){
-	            	 //alert(data.code);
+	            	 //alert(data);
 	            	 //alert(data.url);
-	            	url=data.url;
-	            	 
-	            	$("#myManu").load('/page/'+url+'.html');
+	            	//url=data.url;
+	            	
 	     			var title=document.getElementById("title");
 	     			title.innerText=name;
 	     			$("ul li").attr("class","")
@@ -379,7 +378,10 @@
 	                                         + '</p></div>';
 	                         });
 	                         $('#resText').html(html); */
-	                      }
+	     		    console.log(data);
+	            	$("#myManu").html(data);
+                    }
+	         
 	         });
 			
 		}

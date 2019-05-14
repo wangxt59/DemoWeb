@@ -98,13 +98,21 @@ public class ModelAndViewController{
 	
 	
 	@RequestMapping("/todo.do")
-	@ResponseBody
-	public Map<String, Object> toUrl(HttpServletRequest request, HttpSession session) {
+	public String toUrl(HttpServletRequest request, HttpSession session) {
 		Map<String, Object> reMap=new HashMap<String, Object>();
 		Map<String, Object> returnMap=new HashMap<String, Object>();
 		String url=request.getParameter("url");
 		returnMap.put("url", "#");
-		return returnMap;
+		return "redirect:ajax.do";
 	}
 	
+	@RequestMapping("/ajax.do")
+	public ModelAndView ajax(HttpServletRequest request, HttpSession session) {
+		Map<String, Object> reMap=new HashMap<String, Object>();
+		Map<String, Object> returnMap=new HashMap<String, Object>();
+		String url=request.getParameter("url");
+		returnMap.put("url", "#");
+		System.out.println("KK");
+		return new ModelAndView("myPages/ajax",returnMap);
+	}
 }
